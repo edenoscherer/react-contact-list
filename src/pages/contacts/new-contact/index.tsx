@@ -6,10 +6,16 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { Field, FieldArray, Formik, FormikHelpers } from "formik";
 import { TextField } from "formik-mui";
+import { useSnackbar } from "notistack";
 import React from "react";
 import * as yup from "yup";
 
 import PageContent, { PageBreadcrumbs } from "../../../components/page-content";
+import {
+  AddContact,
+  AddContactParams,
+  ErrorResponse,
+} from "../../../services/api";
 import theme from "../../../theme";
 
 const validationSchema = yup.object({
@@ -25,27 +31,37 @@ const validationSchema = yup.object({
   ),
 });
 
-type FormData = {
-  name: string;
-  contacts: {
-    type: "email" | "phone" | "whatsapp";
-    value: string;
-  }[];
-};
+type FormData = AddContactParams;
 
 const NewContact: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const initialValues: FormData = {
     name: "",
     contacts: [{ type: "email", value: "" }],
   };
+
   const onSubmit = async (
     values: FormData,
     formikHelpers: FormikHelpers<FormData>,
   ) => {
     try {
       console.log(values);
+      const res = await AddContact(values);
+      if ((res as ErrorResponse).error) {
+        const err = res as ErrorResponse;
+        console.error(err.error);
+        console.error(err.message);
+        enqueueSnackbar(err.message, { variant: "error" });
+      } else {
+        enqueueSnackbar("Contato cadastrado com sucesso", {
+          variant: "success",
+        });
+        formikHelpers.resetForm();
+      }
     } catch (error) {
       console.error(error);
+      enqueueSnackbar((error as Error).message, { variant: "error" });
     }
     formikHelpers.setSubmitting(false);
   };
