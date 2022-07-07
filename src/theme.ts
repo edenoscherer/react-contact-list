@@ -7,9 +7,9 @@ import {
 import tinycolor from "tinycolor2";
 
 const primary = "#588157";
-const secondary = "#A3B18A";
+const secondary = "#336699";
 const warning = "#FFC260";
-const success = "#3A5A40";
+const success = "#275431";
 const info = "#9013FE";
 
 const lightenRate = 7.5;
