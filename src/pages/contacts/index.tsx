@@ -2,11 +2,13 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import React from "react";
 
-import PageContent from "../../components/page-content";
+import PageContent, { PageBreadcrumbs } from "../../components/page-content";
 
-const Home: React.FC = () => {
+const Contacts: React.FC = () => {
+  const pageBreadcrumbs: PageBreadcrumbs[] = [{ title: "Contatos" }];
+
   return (
-    <PageContent>
+    <PageContent pageBreadcrumbs={pageBreadcrumbs}>
       <Stack
         direction="column"
         justifyContent="center"
@@ -37,4 +39,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Contacts;
