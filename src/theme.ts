@@ -141,13 +141,6 @@ const defaultTheme: ThemeOptions = {
         },
       },
     },
-    MuiTableRow: {
-      styleOverrides: {
-        root: {
-          height: 56,
-        },
-      },
-    },
     MuiTableCell: {
       styleOverrides: {
         root: {

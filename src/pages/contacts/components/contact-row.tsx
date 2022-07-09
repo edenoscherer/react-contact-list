@@ -14,12 +14,12 @@ import { useSnackbar } from "notistack";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Person } from "../../model";
+import { Person } from "../../../model";
 import {
   DefaultResponse,
   ErrorResponse,
   RemoveContact,
-} from "../../services/api";
+} from "../../../services/api";
 
 const ContactRow: React.FC<{ person: Person }> = ({ person }) => {
   const [open, setOpen] = React.useState(false);
@@ -77,7 +77,7 @@ const ContactRow: React.FC<{ person: Person }> = ({ person }) => {
             title="Editar"
             component={Link}
             to={{
-              pathname: `/produtos/${person.id}`,
+              pathname: `/contacts/${person.id}`,
             }}
           >
             <EditIcon />
