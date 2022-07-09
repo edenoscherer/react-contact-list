@@ -40,3 +40,35 @@ export const AddContact = (
       };
     });
 };
+
+export const ListContacts = (): Promise<
+  DefaultResponse<Person[]> | ErrorResponse
+> => {
+  return Api.get<DefaultResponse<Person[]> | ErrorResponse>("contacts")
+    .then(res => {
+      return res.data;
+    })
+    .catch((error: AxiosError) => {
+      const err = error as Error;
+      return {
+        error: err.name,
+        message: err.message,
+      };
+    });
+};
+
+export const RemoveContact = (
+  id: number,
+): Promise<DefaultResponse<boolean> | ErrorResponse> => {
+  return Api.delete<DefaultResponse<boolean> | ErrorResponse>(`contacts/${id}`)
+    .then(res => {
+      return res.data;
+    })
+    .catch((error: AxiosError) => {
+      const err = error as Error;
+      return {
+        error: err.name,
+        message: err.message,
+      };
+    });
+};
