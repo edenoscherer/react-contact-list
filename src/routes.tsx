@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes as ReactRoutes } from "react-router-dom";
 
 import Layout from "./components/layout";
 import Contacts from "./pages/contacts";
+import EditContact from "./pages/contacts/edit-contact";
 import NewContact from "./pages/contacts/new-contact";
 import Home from "./pages/home";
 
@@ -14,6 +15,7 @@ export const Routes: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/contacts/new" element={<NewContact />} />
+          <Route path="/contacts/:contactId" element={<EditContact />} />
           <Route path="*" element={<div>Error</div>} />
         </Route>
       </ReactRoutes>

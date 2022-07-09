@@ -72,3 +72,39 @@ export const RemoveContact = (
       };
     });
 };
+
+export const GetContact = (
+  id: number,
+): Promise<DefaultResponse<Person> | ErrorResponse> => {
+  return Api.get<DefaultResponse<Person> | ErrorResponse>(`contacts/${id}`)
+    .then(res => {
+      return res.data;
+    })
+    .catch((error: AxiosError) => {
+      const err = error as Error;
+      return {
+        error: err.name,
+        message: err.message,
+      };
+    });
+};
+
+export const EditContact = (
+  id: number,
+  params: AddContactParams,
+): Promise<DefaultResponse<Person> | ErrorResponse> => {
+  return Api.put<DefaultResponse<Person> | ErrorResponse>(`contacts/${id}`, {
+    ...params,
+    id,
+  })
+    .then(res => {
+      return res.data;
+    })
+    .catch((error: AxiosError) => {
+      const err = error as Error;
+      return {
+        error: err.name,
+        message: err.message,
+      };
+    });
+};

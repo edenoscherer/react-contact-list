@@ -8,6 +8,7 @@ import { Field, FieldArray, Formik, FormikHelpers } from "formik";
 import { TextField } from "formik-mui";
 import { useSnackbar } from "notistack";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 import { Person } from "../../../model";
@@ -15,6 +16,7 @@ import {
   AddContact,
   AddContactParams,
   DefaultResponse,
+  EditContact,
   ErrorResponse,
 } from "../../../services/api";
 import theme from "../../../theme";
@@ -39,6 +41,7 @@ const ContactForm: React.FC<{
   initialValues: FormData;
 }> = ({ contactId, initialValues }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
   const onSubmit = async (
     values: FormData,
     formikHelpers: FormikHelpers<FormData>,
@@ -47,7 +50,7 @@ const ContactForm: React.FC<{
       console.log(values);
       let res: ErrorResponse | DefaultResponse<Person>;
       if (contactId) {
-        res = await AddContact(values);
+        res = await EditContact(contactId, values);
       } else {
         res = await AddContact(values);
       }
@@ -60,7 +63,7 @@ const ContactForm: React.FC<{
         enqueueSnackbar("Contato cadastrado com sucesso", {
           variant: "success",
         });
-        formikHelpers.resetForm();
+        navigate("/contacts");
       }
     } catch (error) {
       console.error(error);
