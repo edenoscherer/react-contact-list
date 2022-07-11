@@ -28,6 +28,7 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "tinycolor2": "^1.4.2",
+    "vite": "^2.9.14",
     "yup": "^0.32.11"
   },
   "devDependencies": {
@@ -45,7 +46,6 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.7.1",
-    "typescript": "^4.6.3",
-    "vite": "^2.9.9"
+    "typescript": "^4.6.3"
   }
 }
